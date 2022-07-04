@@ -33,7 +33,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FlutterChat'),
+        title: const Text('Trao đổi với bác sĩ'),
       ),
       body: Container(
         child: Column(

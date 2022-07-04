@@ -79,6 +79,7 @@ class DoctorDetailScreen extends StatelessWidget {
                           Image.asset(
                             loadedDoctor.imageUrl!,
                             height: 120,
+                            width: 75,
                           ),
                           const SizedBox(
                             width: 20,
@@ -186,7 +187,7 @@ class DoctorDetailScreen extends StatelessWidget {
                         height: 50,
                       ),
                       Text(
-                        'About Doctor',
+                        'Thông tin chung',
                         style: boldTextStyle.copyWith(fontSize: 18),
                       ),
                       const SizedBox(
@@ -200,7 +201,7 @@ class DoctorDetailScreen extends StatelessWidget {
                         height: 20,
                       ),
                       Text(
-                        'Upcoming Schedules',
+                        'Lịch hoạt động đang có',
                         style: boldTextStyle.copyWith(fontSize: 18),
                       ),
                       const SizedBox(
@@ -227,7 +228,7 @@ class DoctorDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: ButtonPrimary(
-        text: 'Book an Appointment',
+        text: 'Đặt lịch hẹn',
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:medicine_app/screens/add_product_screen.dart';
+import 'package:medicine_app/widgets/button_primary.dart';
 
-import '../widgets/following_slider.dart';
-import '../screens/newsfeed_detail_screen.dart';
 import '../theme.dart';
+import '../widgets/following_slider.dart';
 import '../screens/product_overview_screen.dart';
-import '../widgets/newsfeed_slider.dart';
 
 class ProductScreen extends StatelessWidget {
   static const routeName = '/product-screen';
@@ -18,20 +18,20 @@ class ProductScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Your Health Inspiration',
+            'Tin Tức Sức Khoẻ',
             style: boldTextStyle.copyWith(fontSize: 20),
           ),
           bottom: const TabBar(
             unselectedLabelColor: greyLightColor,
             tabs: [
               Tab(
-                text: 'Explore',
+                text: 'Khám phá',
               ),
               Tab(
-                text: 'Following',
+                text: 'Đang theo dõi',
               ),
               Tab(
-                text: 'My Content',
+                text: 'Bài viết của tôi',
               ),
             ],
           ),
@@ -59,9 +59,9 @@ class ProductScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Suggested Users',
+                        Text('Đề xuất người dùng nổi bật',
                             style: boldTextStyle.copyWith(fontSize: 24)),
-                        Text('Follow everyone to get inspired from their post.',
+                        Text('Theo dõi một người để xem các bài viết của họ.',
                             style: regularTextStyle.copyWith(
                                 fontSize: 16, color: greyLightColor)),
                       ],
@@ -71,9 +71,22 @@ class ProductScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Center(
-              child: Text(
-                  'Unfortunately, there is no inspiration posts about your health'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Oops, bạn chưa có bài viết nào!',
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                ButtonPrimary(
+                  text: 'Tạo ngay',
+                  onTap: () {
+                    Navigator.of(context).pushNamed(AddProductScreen.routeName);
+                  },
+                )
+              ],
             ),
           ],
         ),

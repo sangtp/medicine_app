@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:medicine_app/screens/newsfeed_detail_screen.dart';
+import 'package:medicine_app/screens/product_screen.dart';
 import 'package:medicine_app/theme.dart';
 
 class NewsFeedSlider extends StatefulWidget {
@@ -15,11 +16,11 @@ class _NewsFeedSliderState extends State<NewsFeedSlider> {
   @override
   Widget build(BuildContext context) {
     final List<String> imagesList = [
-      'assets/images/men_anxiety.jpg',
-      'assets/images/vaccines_covid.jpg',
+      'assets/images/article1.jpg',
+      'assets/images/article2.jpg',
+      'assets/images/article4.jpg',
+      'assets/images/article5.jpg',
       'assets/images/diet_osteoarthritis.jpg',
-      'assets/images/mental_health.jpg',
-      'assets/images/onboarding_illustration.png',
     ];
     return Container(
       height: 300,
@@ -28,7 +29,7 @@ class _NewsFeedSliderState extends State<NewsFeedSlider> {
           GestureDetector(
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => NewsFeedDetailScreen(),
+                builder: (context) => ProductScreen(), //NewsFeedDetailScreen(),
               ),
             ),
             child: CarouselSlider(

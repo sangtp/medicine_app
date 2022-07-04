@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medicine_app/screens/forget_password_screen.dart';
 
 import '../../theme.dart';
 import '../button_primary.dart';
@@ -72,14 +73,16 @@ class _AuthFormState extends State<AuthForm> {
               height: 20,
             ),
             Text(
-              _isLogin ? 'Log In' : 'Sign Up',
+              _isLogin ? 'Đăng Nhập' : 'Đăng Ký',
               style: regularTextStyle.copyWith(fontSize: 25),
             ),
             const SizedBox(
               height: 20,
             ),
             Text(
-              _isLogin ? 'Log in your account!' : 'Register new your account!',
+              _isLogin
+                  ? 'Đăng nhập tài khoản của bạn!'
+                  : 'Đăng ký một tài khoản mới!',
               style: regularTextStyle.copyWith(
                 fontSize: 15,
                 color: greyLightColor,
@@ -114,7 +117,7 @@ class _AuthFormState extends State<AuthForm> {
                         key: const ValueKey('fullName'),
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: 'Full Name',
+                          hintText: 'Họ và Tên',
                           hintStyle: lightTextStyle.copyWith(
                             fontSize: 15,
                             color: greyLightColor,
@@ -122,7 +125,7 @@ class _AuthFormState extends State<AuthForm> {
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter a valid name';
+                            return 'Vui lòng nhập tên.';
                           }
                           return null;
                         },
@@ -155,7 +158,7 @@ class _AuthFormState extends State<AuthForm> {
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Email Address',
+                        hintText: 'Địa chỉ e-mail',
                         hintStyle: lightTextStyle.copyWith(
                           fontSize: 15,
                           color: greyLightColor,
@@ -163,7 +166,7 @@ class _AuthFormState extends State<AuthForm> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty || !value.contains('@')) {
-                          return 'Please enter a valid email address.';
+                          return 'Vui lòng nhập một e-mail hợp lệ.';
                         }
                         return null;
                       },
@@ -206,7 +209,7 @@ class _AuthFormState extends State<AuthForm> {
                           onPressed: showHide,
                         ),
                         border: InputBorder.none,
-                        hintText: 'Password',
+                        hintText: 'Mật khẩu',
                         hintStyle: lightTextStyle.copyWith(
                           fontSize: 15,
                           color: greyLightColor,
@@ -214,7 +217,7 @@ class _AuthFormState extends State<AuthForm> {
                       ),
                       validator: (value) {
                         if (value!.isEmpty || value.length < 7) {
-                          return 'Password must be at least 7 characters long.';
+                          return 'Mật khẩu phải chứa ít nhất 7 ký tự.';
                         }
                         return null;
                       },
@@ -237,33 +240,50 @@ class _AuthFormState extends State<AuthForm> {
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: ButtonPrimary(
-                  text: _isLogin ? 'LOGIN' : 'REGISTER',
+                  text: _isLogin ? 'ĐĂNG NHẬP' : 'ĐĂNG KÝ',
                   onTap: _trySubmit,
                 ),
               ),
             const SizedBox(
               height: 16,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Text(
-                  _isLogin ? 'Create new account?' : 'Already have an account?',
-                  style: lightTextStyle.copyWith(
-                      color: greyLightColor, fontSize: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _isLogin
+                          ? 'Tạo một tài khoản mới?'
+                          : 'Bạn đã có tài khoản?',
+                      style: lightTextStyle.copyWith(
+                          color: greyLightColor, fontSize: 16),
+                    ),
+                    TextButton(
+                      child: Text(
+                        _isLogin ? 'Đăng ký' : 'Đăng nhập',
+                        style: boldTextStyle.copyWith(
+                          color: greenColor,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isLogin = !_isLogin;
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 TextButton(
-                    child: Text(
-                      _isLogin ? 'Sign Up' : 'Log In',
-                      style: boldTextStyle.copyWith(
-                        color: greenColor,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => ForgetPasswordScreen(),
                       ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isLogin = !_isLogin;
-                      });
-                    }),
+                    );
+                  },
+                  child: Text('Quên mật khẩu?'),
+                ),
               ],
             ),
           ],

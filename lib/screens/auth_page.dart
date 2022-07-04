@@ -38,12 +38,14 @@ class _RegisterPagesState extends State<RegisterPages> {
             .collection('users')
             .doc(authResult.user!.uid)
             .set({
+          'id': authResult.user!.uid,
           'username': username,
           'email': email,
+          'createdAt': Timestamp.now(),
         });
       }
     } on FirebaseAuthException catch (error) {
-      var message = 'An error occurred, please check your credentials!';
+      var message = 'Đã có một vài lỗi xảy ra, vui lòng thử lại!';
       if (error.message != null) {
         message = error.message!;
       }

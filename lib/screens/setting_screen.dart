@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:medicine_app/screens/auth_page.dart';
+import 'package:medicine_app/screens/general_settings_screen.dart';
 import 'package:medicine_app/theme.dart';
 import 'package:medicine_app/widgets/setting_card.dart';
 
@@ -16,6 +17,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
+    final user1 = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       //backgroundColor: Color(0xffb1d9b2),
       body: Column(
@@ -41,7 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         ),
                       ),
                       Text(
-                        'Settings',
+                        'Cài Đặt',
                         style: boldTextStyle.copyWith(fontSize: 30),
                       ),
                       const SizedBox(
@@ -66,23 +68,46 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height - 100,
-            padding: const EdgeInsets.all(16),
+            height: MediaQuery.of(context).size.height - 200,
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: GridView(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 16,
               ),
-              children: const [
-                SettingCard('General Settings'),
-                SettingCard('Update App'),
-                SettingCard('Privacy Policy'),
-                SettingCard('Terms of Service'),
-                SettingCard('Contact Us'),
-                SettingCard('Help'),
+              children: [
+                SettingCard(
+                  'Cài đặt chung',
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => GeneralSettingsScreen(),
+                      ),
+                    );
+                  },
+                ),
+                SettingCard('Cập nhật ứng dụng'),
+                SettingCard('Chính sách bảo mật'),
+                SettingCard('Điều khoản dịch vụ'),
+                SettingCard('Liên hệ'),
+                SettingCard('Giúp đỡ'),
               ],
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'UID : ',
+                style: boldTextStyle.copyWith(fontSize: 20),
+              ),
+              Text(
+                user1.uid,
+                style:
+                    boldTextStyle.copyWith(fontSize: 15, color: greyLightColor),
+              ),
+            ],
           ),
         ],
       ),

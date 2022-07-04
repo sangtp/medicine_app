@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:medicine_app/screens/edit_product_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../theme.dart';
@@ -9,6 +12,8 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user1 = FirebaseAuth.instance.currentUser!;
+    final productData = Provider.of<Products>(context);
     final String productId =
         ModalRoute.of(context)!.settings.arguments as String;
     final loadedProduct = Provider.of<Products>(
@@ -90,11 +95,28 @@ class ProductDetailScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.favorite,
-        ),
-        onPressed: () {},
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
+        spaceBetweenChildren: 10,
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.edit),
+            label: 'Chỉnh sửa',
+            onTap: () {
+              Navigator.of(context).pushNamed(EditProductScreen.routeName,
+                  arguments: loadedProduct.id);
+            },
+          ),
+          if (user1.email == 'admin@admin.com')
+            SpeedDialChild(
+              child: const Icon(Icons.clear),
+              label: 'Gỡ bài',
+              onTap: () {
+                //productData.deleteProduct(loadedProduct.id!);
+                //Navigator.of(context).pop();
+              },
+            ),
+        ],
       ),
     );
   }

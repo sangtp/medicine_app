@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
@@ -17,10 +18,22 @@ class MainPages extends StatefulWidget {
 
 class _MainPagesState extends State<MainPages> {
   int _selectedIndex = 0;
+  final user1 = FirebaseAuth.instance.currentUser!;
 
-  final _pageList = [
+  final _userPageList = [
     HomePages(),
     DoctorScreen(),
+    NotificationsScreen(),
+    ProfilePages(),
+  ];
+
+  final _adminPageList = [
+    HomePages(),
+    ProfilePages(),
+  ];
+
+  final _doctorPageList = [
+    HomePages(),
     NotificationsScreen(),
     ProfilePages(),
   ];
@@ -34,26 +47,35 @@ class _MainPagesState extends State<MainPages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pageList.elementAt(_selectedIndex),
+      body: user1.email == 'admin@admin.com'
+          ? _adminPageList.elementAt(_selectedIndex)
+          : user1.email == 'doctor1@doctor.com'
+              ? _doctorPageList.elementAt(_selectedIndex)
+              : _userPageList.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         showSelectedLabels: true,
         showUnselectedLabels: false,
-        items: const [
-          BottomNavigationBarItem(
+        items: [
+          const BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "Home",
+            label: "Trang chủ",
           ),
+          if (user1.email != 'admin@admin.com' &&
+              user1.email != 'doctor1@doctor.com')
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.medical_services),
+              label: "Bác sĩ",
+            ),
+          if (user1.email != 'admin@admin.com')
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.notifications),
+              label: "Thông báo",
+            ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.medical_services),
-            label: "Doctor",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: "Notifications",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: user1.email!.contains('@admin.com')
+                ? const Icon(Icons.settings)
+                : const Icon(Icons.person),
+            label: user1.email == 'admin@admin.com' ? "Admin" : "Cá nhân",
           ),
         ],
         currentIndex: _selectedIndex,

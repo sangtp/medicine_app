@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:medicine_app/screens/appointment_confirm_screen.dart';
+import 'package:medicine_app/screens/home_page.dart';
+import 'package:medicine_app/screens/main_page.dart';
 import 'package:medicine_app/theme.dart';
 
 class TrackAppointmentScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _TrackAppointmentScreenState extends State<TrackAppointmentScreen> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Track Appointment'),
+        title: Text('Theo Dõi Lịch Hẹn'),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications),
@@ -33,16 +35,16 @@ class _TrackAppointmentScreenState extends State<TrackAppointmentScreen> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Oder Number 1001',
+              'Mã lịch hẹn 1001',
               style: boldTextStyle.copyWith(fontSize: 20),
             ),
             Text(
-              'Order Number Confirmed. Ready to Pick',
+              'Lịch hẹn đã được xác nhận, vui lòng theo dõi!',
               style:
                   regularTextStyle.copyWith(fontSize: 15, color: Colors.grey),
             ),
@@ -61,11 +63,11 @@ class _TrackAppointmentScreenState extends State<TrackAppointmentScreen> {
                 ),
                 Column(
                   children: [
-                    statusWidget('confirm', 'Confirmed', true),
-                    statusWidget('contact_doctor', 'Contacted', false),
-                    statusWidget('in_progress', 'In Process', false),
-                    statusWidget('meeting_online', 'Meeting', false),
-                    statusWidget('delivered', 'Success', false),
+                    statusWidget('confirm', 'Xác Nhận', true),
+                    statusWidget('contact_doctor', 'Đã Liên Hệ', false),
+                    statusWidget('in_progress', 'Đang Xử Lý', false),
+                    statusWidget('meeting_online', 'Gặp Mặt', false),
+                    statusWidget('delivered', 'Thành Công', false),
                   ],
                 ),
               ],
@@ -88,7 +90,7 @@ class _TrackAppointmentScreenState extends State<TrackAppointmentScreen> {
                       border: Border.all(color: greenColor),
                     ),
                     child: Text(
-                      'Cancel',
+                      'Hủy Bỏ',
                       style: regularTextStyle.copyWith(color: greenColor),
                     ),
                   ),
@@ -96,17 +98,24 @@ class _TrackAppointmentScreenState extends State<TrackAppointmentScreen> {
                     Navigator.of(context).pop();
                   },
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
+                GestureDetector(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                      color: greenColor,
                     ),
-                    color: greenColor,
+                    child: Text(
+                      'Tới Trang Chủ',
+                      style: regularTextStyle.copyWith(color: Colors.white),
+                    ),
                   ),
-                  child: Text(
-                    'My Order',
-                    style: regularTextStyle.copyWith(color: Colors.white),
+                  onTap: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) => MainPages(),
+                    ),
                   ),
                 ),
               ],

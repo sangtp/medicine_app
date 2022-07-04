@@ -14,12 +14,9 @@ class AppointmentConfirmScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Xác Nhận Lịch Hẹn'),
         backgroundColor: greenColor,
         elevation: 0,
-        // leading: IconButton(
-        //   icon: Icon(Icons.arrow_back),
-        //   onPressed: () {},
-        // ),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications),
@@ -46,11 +43,11 @@ class AppointmentConfirmScreen extends StatelessWidget {
               height: 15,
             ),
             Text(
-              'Thank you for choosing us!',
+              'Cảm ơn bạn đã chọn chúng tôi!',
               style: boldTextStyle,
             ),
             Text(
-              'Your order has been placed and we will pick up your clothes on time!',
+              'Lịch hẹn của bạn đã được đặt thành công, vui lòng xác nhận và đến đúng giờ!',
               style: regularTextStyle,
               textAlign: TextAlign.center,
             ),
@@ -61,7 +58,7 @@ class AppointmentConfirmScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Order ID',
+                  'Mã lịch hẹn',
                   style: boldTextStyle.copyWith(fontSize: 16),
                 ),
                 Container(
@@ -87,7 +84,7 @@ class AppointmentConfirmScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Clothes Count',
+                  'Số dịch vụ',
                   style: boldTextStyle.copyWith(fontSize: 16),
                 ),
                 Text(
@@ -100,14 +97,14 @@ class AppointmentConfirmScreen extends StatelessWidget {
             ),
             divider(),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Pick up Date & Time',
+                  'Thời gian',
                   style: boldTextStyle.copyWith(fontSize: 16),
                 ),
                 Text(
-                  'Wednesday, 07 Aug. 2022. Between 10:00 AM & 12:00 AM',
+                  'Thứ Tư, 22-06-2022. Từ 10:00 đến 12:00',
                   style: regularTextStyle.copyWith(
                       fontSize: 16, color: Colors.grey),
                 )
@@ -118,11 +115,11 @@ class AppointmentConfirmScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Payment Method',
+                  'Phương thức thanh toán',
                   style: boldTextStyle,
                 ),
                 Text(
-                  'Cash',
+                  'Tiền mặt',
                   style: boldTextStyle.copyWith(fontSize: 16),
                 ),
               ],
@@ -135,7 +132,7 @@ class AppointmentConfirmScreen extends StatelessWidget {
                 showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                    content: const Text('Are you sure?'),
+                    content: const Text('Xác nhận đặt lịch?'),
                     actions: [
                       TextButton(
                         onPressed: () {
@@ -146,23 +143,23 @@ class AppointmentConfirmScreen extends StatelessWidget {
                           );
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text('Book Successful'),
+                              content: Text('Đặt lịch thành công!'),
                             ),
                           );
                         },
-                        child: const Text('Yes'),
+                        child: const Text('Có'),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: const Text('No'),
+                        child: const Text('Không'),
                       ),
                     ],
                   ),
                 );
               },
-              text: 'Confirm',
+              text: 'Xác Nhận',
             ),
           ],
         ),

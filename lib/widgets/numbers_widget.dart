@@ -9,11 +9,11 @@ class NumbersWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildButton(context, '4.8', 'Ranking'),
+            buildButton(context, '2', 'Bài Viết'),
             buildDivider(),
-            buildButton(context, '35', 'Following'),
+            buildButton(context, '35', 'Đang Theo Dõi'),
             buildDivider(),
-            buildButton(context, '50', 'Followers'),
+            buildButton(context, '50', 'Người Theo Dõi'),
           ],
         ),
       );

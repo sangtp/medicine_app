@@ -20,7 +20,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Select Date & Time'),
+        title: Text('Chọn Thời Gian'),
         actions: [
           IconButton(
             onPressed: () {},
@@ -34,7 +34,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Pick Up Date',
+              'Chọn ngày',
               style: boldTextStyle.copyWith(fontSize: 20),
             ),
             const SizedBox(
@@ -44,11 +44,11 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  PickupDateWidget('Web', '07 Aug'),
-                  PickupDateWidget('Thu', '08 Aug'),
-                  PickupDateWidget('Fri', '09 Aug'),
-                  PickupDateWidget('Sat', '10 Aug'),
-                  PickupDateWidget('Sun', '11 Aug'),
+                  PickupDateWidget('Thứ Tư', '22-06-22'),
+                  PickupDateWidget('Thứ Năm', '23-06-22'),
+                  PickupDateWidget('Thứ Sáu', '24-06-22'),
+                  PickupDateWidget('Thứ Bảy', '25-06-22'),
+                  PickupDateWidget('Chủ nhật', '26-06-22'),
                 ],
               ),
             ),
@@ -63,7 +63,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               height: 15,
             ),
             Text(
-              'Pick Up Time',
+              'Chọn giờ',
               style: boldTextStyle.copyWith(fontSize: 20),
             ),
             const SizedBox(
@@ -84,7 +84,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               height: 15,
             ),
             Text(
-              'Pick Up Service',
+              'Dịch vụ',
               style: boldTextStyle.copyWith(fontSize: 20),
             ),
             const SizedBox(
@@ -94,27 +94,19 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    chooseWidget(),
+                    chooseWidget('Khám tổng quát'),
                     const SizedBox(
                       height: 5,
                     ),
-                    chooseWidget(),
+                    chooseWidget('Khám răng'),
                     const SizedBox(
                       height: 5,
                     ),
-                    chooseWidget(),
+                    chooseWidget('Khám mắt'),
                     const SizedBox(
                       height: 5,
                     ),
-                    chooseWidget(),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    chooseWidget(),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    chooseWidget(),
+                    chooseWidget('Tái khám'),
                     const SizedBox(
                       height: 10,
                     ),
@@ -122,33 +114,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(AppointmentConfirmScreen.routeName);
-                        // showDialog(
-                        //   context: context,
-                        //   builder: (context) => AlertDialog(
-                        //     content: const Text('Are you sure?'),
-                        //     actions: [
-                        //       TextButton(
-                        //         onPressed: () {
-                        //           Navigator.of(context).pop();
-                        //           ScaffoldMessenger.of(context).showSnackBar(
-                        //             const SnackBar(
-                        //               content: Text('Book Successful'),
-                        //             ),
-                        //           );
-                        //         },
-                        //         child: const Text('Yes'),
-                        //       ),
-                        //       TextButton(
-                        //         onPressed: () {
-                        //           Navigator.of(context).pop();
-                        //         },
-                        //         child: const Text('No'),
-                        //       ),
-                        //     ],
-                        //   ),
-                        // );
                       },
-                      text: 'BOOK',
+                      text: 'Xác Nhận',
                     ),
                   ],
                 ),
@@ -160,7 +127,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     );
   }
 
-  Container chooseWidget() {
+  Container chooseWidget(String serviceName) {
     return Container(
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.all(20),
@@ -168,7 +135,7 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         borderRadius: BorderRadius.circular(20),
         color: lightGreenColor,
       ),
-      child: serviceWidget('Visit'),
+      child: serviceWidget(serviceName),
     );
   }
 

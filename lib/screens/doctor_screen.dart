@@ -27,7 +27,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Find Your Desired\nDoctor',
+                      'Danh sách bác sĩ',
                       style: boldTextStyle.copyWith(fontSize: 32),
                     ),
                   ],
@@ -63,7 +63,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
                         Icons.search,
                         color: Color(0xffb1d9b2),
                       ),
-                      hintText: 'Search for Doctors...',
+                      hintText: 'Tìm kiếm...',
                       hintStyle: regularTextStyle.copyWith(
                         color: const Color(0xffb1d9b2),
                       ),
@@ -74,7 +74,7 @@ class _DoctorScreenState extends State<DoctorScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: Text(
-                  'TOP DOCTOR',
+                  'BÁC SĨ HIỆN CÓ',
                   style: boldTextStyle,
                 ),
               ),
